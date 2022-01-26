@@ -6,15 +6,20 @@ import (
 	"Mutant-Api/services"
 	"log"
 	"net/http"
+
+	data "github.com/duvansuo/Mutant-API/Data"
 )
 
 var (
 	mutantService    = services.MutantService{}
-	mutantController = controllers.NewMutantMuxController(mutantService)
+	mutantStatData   = data.NewMutantStatsRepository()
+	statService      = services.NewStatsService(mutantStatData)
+	mutantController = controllers.NewMutantMuxController(mutantService, statService)
+	statController   = controllers.NewStatMuxController(statService)
 )
 
 func main() {
-	router := routing.NewRouter(mutantController)
+	router := routing.NewRouter(mutantController, statController)
 	server := http.ListenAndServe(":8080", router)
 
 	log.Fatal(server)

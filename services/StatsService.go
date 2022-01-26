@@ -3,6 +3,7 @@ package services
 import (
 	data "Mutant-Api/Data"
 	models "Mutant-Api/Models"
+	"fmt"
 )
 
 type StatsService struct {
@@ -16,6 +17,7 @@ func NewStatsService(repo data.StatsData) StatsService {
 }
 
 func (service *StatsService) AddStats(isMutant bool) error {
+	fmt.Println("ingreso al servicio AddStats")
 	statsDTO := service.GetStats()
 	statsDTO = calcStats(statsDTO, isMutant)
 	err := service.repo.AddStats(statsDTO)
@@ -26,9 +28,11 @@ func (service *StatsService) AddStats(isMutant bool) error {
 	return nil
 }
 func (service *StatsService) GetStats() models.MutantStatsDTO {
+	fmt.Printf("ingreso al servicio GetStats\n")
 	statsDTO, err := service.repo.GetStats()
 	if err != nil {
-		return models.MutantStatsDTO{}
+		panic(err)
+
 	}
 	return statsDTO
 }

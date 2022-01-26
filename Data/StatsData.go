@@ -1,6 +1,8 @@
 package data
 
-import models "Mutant-Api/Models"
+import (
+	models "Mutant-Api/Models"
+)
 
 type StatsData interface {
 	AddStats(statsDto models.MutantStatsDTO) error

@@ -12,15 +12,18 @@ var mutantDTO models.MutantDto
 
 type mutantMuxController struct {
 	mutantService services.MutantService
+	statService   services.StatsService
 }
 
-func NewMutantMuxController(mutantService services.MutantService) MutantController {
+func NewMutantMuxController(mutantService services.MutantService, statService services.StatsService) MutantController {
 	return &mutantMuxController{
 		mutantService,
+		statService,
 	}
 }
 
 func (controller *mutantMuxController) IsMutant(w http.ResponseWriter, r *http.Request) {
+
 	err := json.NewDecoder(r.Body).Decode(&mutantDTO)
 	if err != nil {
 		Response(w, http.StatusBadRequest, err)
@@ -29,13 +32,11 @@ func (controller *mutantMuxController) IsMutant(w http.ResponseWriter, r *http.R
 
 	mutant := controller.mutantService.NewMutant(mutantDTO.Dna)
 	isMutant, err := mutant.IsMutant()
-
+	_ = controller.statService.AddStats(isMutant)
 	if err != nil {
 		Response(w, http.StatusInternalServerError, err)
 		return
 	}
-
-	// err = controller.mutantStatsService.AddStats(isMutant)
 
 	if err != nil {
 		Response(w, http.StatusInternalServerError, err)

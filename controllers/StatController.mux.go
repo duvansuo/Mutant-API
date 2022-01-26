@@ -6,10 +6,15 @@ import (
 )
 
 type statMuxController struct {
-	StatsService services.MutantService
+	statsService services.StatsService
 }
 
-func (controller *mutantMuxController) MutantStats(w http.ResponseWriter, r *http.Request) {
-	statsDTO := controller.StatsService.GetStats()
-	Response(w, statsDTO)
+func NewStatMuxController(statsService services.StatsService) StatController {
+	return &statMuxController{
+		statsService,
+	}
+}
+func (controller *statMuxController) MutantStats(w http.ResponseWriter, r *http.Request) {
+	statsDTO := controller.statsService.GetStats()
+	Response(w, http.StatusOK, statsDTO)
 }

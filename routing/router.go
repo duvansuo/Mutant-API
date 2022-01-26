@@ -6,11 +6,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func NewRouter(mutantController controllers.MutantController) *mux.Router {
+func NewRouter(mutantController controllers.MutantController, statController controllers.StatController) *mux.Router {
 	r := mux.NewRouter().StrictSlash(true)
 
 	r.HandleFunc("/mutant", mutantController.IsMutant).Methods("POST")
-	// r.HandleFunc("/stats", controllers.GetStats).Methods("GET")
+	r.HandleFunc("/stats", statController.MutantStats).Methods("GET")
 
 	return r
 }
