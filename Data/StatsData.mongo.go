@@ -1,11 +1,12 @@
 package data
 
 import (
-	models "Mutant-Api/Models"
 	"context"
 	"fmt"
 	"log"
 	"time"
+
+	models "github.com/duvansuo/Mutant-API/Models"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -28,10 +29,6 @@ func newStatsMongoData() *statsMongoData {
 		log.Fatal(err)
 	}
 	// defer client.Disconnect(ctx)
-
-	/*
-	   List databases
-	*/
 	collection := client.Database("PruebaMutant").Collection("dna")
 	return &statsMongoData{
 		collection,

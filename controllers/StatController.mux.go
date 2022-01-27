@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"Mutant-Api/services"
 	"net/http"
+
+	"github.com/duvansuo/Mutant-API/services"
 )
 
 type statMuxController struct {

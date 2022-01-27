@@ -1,11 +1,12 @@
 package controllers
 
 import (
-	models "Mutant-Api/Models"
 	"encoding/json"
 	"net/http"
 
-	"Mutant-Api/services"
+	models "github.com/duvansuo/Mutant-API/Models"
+
+	"github.com/duvansuo/Mutant-API/services"
 )
 
 var mutantDTO models.MutantDto
@@ -23,7 +24,6 @@ func NewMutantMuxController(mutantService services.MutantService, statService se
 }
 
 func (controller *mutantMuxController) IsMutant(w http.ResponseWriter, r *http.Request) {
-
 	err := json.NewDecoder(r.Body).Decode(&mutantDTO)
 	if err != nil {
 		Response(w, http.StatusBadRequest, err)
@@ -32,7 +32,7 @@ func (controller *mutantMuxController) IsMutant(w http.ResponseWriter, r *http.R
 
 	mutant := controller.mutantService.NewMutant(mutantDTO.Dna)
 	isMutant, err := mutant.IsMutant()
-	_ = controller.statService.AddStats(isMutant)
+	// _ = controller.statService.AddStats(isMutant)
 	if err != nil {
 		Response(w, http.StatusInternalServerError, err)
 		return

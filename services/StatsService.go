@@ -1,9 +1,10 @@
 package services
 
 import (
-	data "Mutant-Api/Data"
-	models "Mutant-Api/Models"
 	"fmt"
+
+	data "github.com/duvansuo/Mutant-API/Data"
+	models "github.com/duvansuo/Mutant-API/Models"
 )
 
 type StatsService struct {
@@ -44,12 +45,10 @@ func calcStats(statsDTO models.MutantStatsDTO, isMutant bool) models.MutantStats
 	} else {
 		statsDTO.CountHuman += 1
 	}
-
 	if statsDTO.CountHuman == 0 {
 		statsDTO.Ratio = 1
 	} else {
 		statsDTO.Ratio = float32(statsDTO.CountMutant) / float32(statsDTO.CountHuman)
 	}
-
 	return statsDTO
 }

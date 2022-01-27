@@ -1,7 +1,7 @@
 package data
 
 import (
-	models "Mutant-Api/Models"
+	models "github.com/duvansuo/Mutant-API/Models"
 )
 
 type StatsData interface {

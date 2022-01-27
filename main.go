@@ -1,11 +1,14 @@
 package main
 
 import (
-	"Mutant-Api/controllers"
-	"Mutant-Api/routing"
-	"Mutant-Api/services"
 	"log"
 	"net/http"
+
+	"github.com/duvansuo/Mutant-API/services"
+
+	"github.com/duvansuo/Mutant-API/routing"
+
+	"github.com/duvansuo/Mutant-API/controllers"
 
 	data "github.com/duvansuo/Mutant-API/Data"
 )
