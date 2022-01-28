@@ -15,7 +15,7 @@ import (
 
 var (
 	mutantService    = services.MutantService{}
-	mutantStatData   = data.NewMutantStatsRepository()
+	mutantStatData   = data.NewMutantStatsData()
 	statService      = services.NewStatsService(mutantStatData)
 	mutantController = controllers.NewMutantMuxController(mutantService, statService)
 	statController   = controllers.NewStatMuxController(statService)

@@ -32,7 +32,7 @@ func (controller *mutantMuxController) IsMutant(w http.ResponseWriter, r *http.R
 
 	mutant := controller.mutantService.NewMutant(mutantDTO.Dna)
 	isMutant, err := mutant.IsMutant()
-	// _ = controller.statService.AddStats(isMutant)
+	_ = controller.statService.AddStats(isMutant)
 	if err != nil {
 		Response(w, http.StatusInternalServerError, err)
 		return

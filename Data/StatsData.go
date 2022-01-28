@@ -9,6 +9,6 @@ type StatsData interface {
 	GetStats() (models.MutantStatsDTO, error)
 }
 
-func NewMutantStatsRepository() StatsData {
+func NewMutantStatsData() StatsData {
 	return newStatsMongoData()
 }

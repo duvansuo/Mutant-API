@@ -20,7 +20,7 @@ func NewStatsService(repo data.StatsData) StatsService {
 func (service *StatsService) AddStats(isMutant bool) error {
 	fmt.Println("ingreso al servicio AddStats")
 	statsDTO := service.GetStats()
-	statsDTO = calcStats(statsDTO, isMutant)
+	statsDTO = calculateStats(statsDTO, isMutant)
 	err := service.repo.AddStats(statsDTO)
 	if err != nil {
 		return err
@@ -38,7 +38,7 @@ func (service *StatsService) GetStats() models.MutantStatsDTO {
 	return statsDTO
 }
 
-func calcStats(statsDTO models.MutantStatsDTO, isMutant bool) models.MutantStatsDTO {
+func calculateStats(statsDTO models.MutantStatsDTO, isMutant bool) models.MutantStatsDTO {
 
 	if isMutant {
 		statsDTO.CountMutant += 1
