@@ -2,6 +2,7 @@ package data
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"time"
 
@@ -17,10 +18,13 @@ type statsMongoData struct {
 }
 
 func newStatsMongoData() *statsMongoData {
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017/"))
+	fmt.Println("ingreso ")
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://Mutant:Mutant123@pruebamutant.v0njz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"))
 	if err != nil {
+		fmt.Println("Error")
 		log.Fatal(err)
 	}
+	fmt.Println("Continuo ")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	err = client.Connect(ctx)
 	if err != nil {
