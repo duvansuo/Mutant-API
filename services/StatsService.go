@@ -1,8 +1,6 @@
 package services
 
 import (
-	"fmt"
-
 	data "github.com/duvansuo/Mutant-API/Data"
 	models "github.com/duvansuo/Mutant-API/Models"
 )
@@ -18,18 +16,15 @@ func NewStatsService(repo data.StatsData) StatsService {
 }
 
 func (service *StatsService) AddStats(isMutant bool) error {
-	fmt.Println("ingreso al servicio AddStats")
 	statsDTO := service.GetStats()
 	statsDTO = calculateStats(statsDTO, isMutant)
 	err := service.repo.AddStats(statsDTO)
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 func (service *StatsService) GetStats() models.MutantStatsDTO {
-	fmt.Printf("ingreso al servicio GetStats\n")
 	statsDTO, err := service.repo.GetStats()
 	if err != nil {
 		panic(err)

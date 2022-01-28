@@ -2,7 +2,6 @@ package data
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"time"
 
@@ -18,7 +17,6 @@ type statsMongoData struct {
 }
 
 func newStatsMongoData() *statsMongoData {
-	fmt.Println("teete")
 	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb://localhost:27017/"))
 	if err != nil {
 		log.Fatal(err)
@@ -45,7 +43,6 @@ func (repo *statsMongoData) AddStats(statsDto models.MutantStatsDTO) error {
 }
 
 func (repo *statsMongoData) GetStats() (models.MutantStatsDTO, error) {
-	fmt.Println("sassssssss")
 	ctx := context.Background()
 	var statsDTO models.MutantStatsDTO
 	err := repo.database.FindOne(ctx, bson.M{}).Decode(&statsDTO)
