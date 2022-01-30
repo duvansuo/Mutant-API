@@ -41,7 +41,6 @@ func (mutant *mutant) IsMutant() (bool, error) {
 	if !mutant.ValidDimension() {
 		return false, errors.New("dimensions do not match")
 	}
-	mutant.goOverHorizontal()
 	wg := sync.WaitGroup{}
 	wg.Add(4)
 	go func() {
